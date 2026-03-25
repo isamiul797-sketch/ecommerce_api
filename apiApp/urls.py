@@ -5,6 +5,7 @@ urlpatterns = [
     path("product_list",views.product_list, name ="product_list "),
     path("product_detail/<slug:slug>",views.product_detail, name ="product_detail "),
     path("category_list",views.categoryList, name ="category_list "),
-    path("category_detail/<slug:slug>",views.category_detail, name ="category_detail " )
+    path("category_detail/<slug:slug>",views.category_detail, name ="category_detail " ),
+    path("add_to_cart/",views.add_to_cart, name ="add_to_cart"),
 ]
 
