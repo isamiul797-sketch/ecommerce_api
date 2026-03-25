@@ -43,3 +43,20 @@ class Product(models.Model):
                 counter += 1
             self.slug = unique_slug
         super().save(*arg,**kwargs)
+
+class Cart(models.Model):
+    cart_code = models.CharField(max_length=11 , unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.cart_code
+    
+class CartItem(models.Model):
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name="cart_items")
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)
+
+    def __str__(self):
+        return f"{self.quantity} * {self.product.name} in cart {self.cart.cart_code}"
+
