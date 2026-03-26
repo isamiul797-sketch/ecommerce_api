@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view
 from .models import Product,Category,Cart,CartItem
 from rest_framework.response import Response
-from apiApp.serializers import ProductListSerializer,ProductDetailSerializer,CategoryListSerializer,CategoryDetailSerializer,CartSerializer
+from apiApp.serializers import ProductListSerializer,ProductDetailSerializer,CategoryListSerializer,CategoryDetailSerializer,CartSerializer,CartItemSerializer
 
 # Create your views here.
 
@@ -48,3 +48,18 @@ def add_to_cart(request):
 
     serializer = CartSerializer(cart)
     return Response(serializer.data)
+
+
+@api_view(["PUT"])
+def update_cartitem_quantity(request):
+    cartitem_id = request.data.get("item_id")
+    quantity = request.data.get("quantity")
+
+    quantity = int(quantity)
+
+    cartitam = CartItem.objects.get(id = cartitem_id)
+    cartitam.quantity = quantity
+    cartitam.save()
+
+    serializer = CartItemSerializer(cartitam)
+    return Response({"data":serializer.data, "message":"Cartitem Updated Succesfully!"})

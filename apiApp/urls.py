@@ -7,5 +7,6 @@ urlpatterns = [
     path("category_list",views.categoryList, name ="category_list "),
     path("category_detail/<slug:slug>",views.category_detail, name ="category_detail " ),
     path("add_to_cart/",views.add_to_cart, name ="add_to_cart"),
+    path("update_cartitem_quantity/",views.update_cartitem_quantity,name="update_cartitem_quantity")
 ]
 
